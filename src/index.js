@@ -1,19 +1,22 @@
-const sum  = require("./sum").sum;
-import { sum2 } from "./sum2";
-import { style } from './css/index.scss';
-import Icon from "./assets/img/proba.png";
 
-console.log("Hello World");
-console.log(sum(2,3));
-console.log(sum2(2,3));
+fetch("https://raw.githubusercontent.com/jamie80/flytickets/main/endpoints/endpoint2.json")
+    .then((resp) => resp.json()) // Transform the data into json
+    .then(function (data) {
 
-let heading = document.querySelector("#demo"),
-    sumValue = sum(10,5);
+        const destinations = data.destination;
+        // console.log(destinations);
 
-heading.innerText = `10+10= ${sumValue}`;
+        destinations.forEach(function (element) {
 
-let myIcon = new Image();
-myIcon.src = Icon;
+            const city = document.createElement("option");
+            city.innerHTML = `${element.desc}`;
+            document.getElementById("destinationSelect").appendChild(city);
 
-document.querySelector("div").append(myIcon);
-document.querySelector('div').classList.add("change");
+        })
+
+        destinations.forEach(function (element) {
+            city = document.createElement("option");
+            city.innerHTML = `${element.desc}`;
+            document.getElementById("originSelect").appendChild(city);
+        })
+    });
